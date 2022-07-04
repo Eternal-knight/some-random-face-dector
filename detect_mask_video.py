@@ -64,8 +64,8 @@ def detect_and_predict_mask(frame, faceNet, maskNet):
 	return (locs, preds)
 
 # paths
-prototxtPath = r"C:\Users\user\OneDrive\Desktop\Fardin\face dector\face_detector\deploy.prototxt"
-weightsPath = r"C:\Users\user\OneDrive\Desktop\Fardin\face dector\face_detector\res10_300x300_ssd_iter_140000.caffemodel"
+prototxtPath = r"C:\Users\user\OneDrive\Desktop\Fardin\New folder\random\fCE\face_detector\deploy.prototxt"
+weightsPath = r"C:\Users\user\OneDrive\Desktop\Fardin\New folder\random\fCE\face_detector\res10_300x300_ssd_iter_140000.caffemodel"
 faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
 
 
