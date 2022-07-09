@@ -9,6 +9,21 @@ import time
 import cv2
 import os
 
+def detect_and_predict_mask(frame, faceNet, maskNet):
+	# dimensions frame
+	(h, w) = frame.shape[:2]
+	blob = cv2.dnn.blobFromImage(frame, 1.0, (224, 224),
+		(104.0, 177.0, 123.0))
+
+	
+	faceNet.setInput(blob)
+	detections = faceNet.forward()
+	print(detections.shape)
+
+
+	faces = []
+	locs = []
+	preds = []
 
 	# detections
 	for i in range(0, detections.shape[2]):
@@ -49,8 +64,8 @@ import os
 	return (locs, preds)
 
 # paths
-prototxtPath = r"C:\Users\user\OneDrive\Desktop\Fardin\New folder\random\fCE\some-random-face-detector\deploy.prototxt"
-weightsPath = r"C:\Users\user\OneDrive\Desktop\Fardin\New folder\random\fCE\some-random-face-detector\res10_300x300_ssd_iter_140000.caffemodel"
+prototxtPath = r""
+weightsPath = r""
 faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
 
 
