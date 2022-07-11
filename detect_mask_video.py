@@ -60,15 +60,6 @@ def detect_and_predict_mask(frame, faceNet, maskNet):
 		preds = maskNet.predict(faces, batch_size=32)
 
 	
-	# locations
-	return (locs, preds)
-
-# paths
-prototxtPath = r""
-weightsPath = r""
-faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
-
-
 maskNet = load_model("mask_detector.model")
 
 #video
