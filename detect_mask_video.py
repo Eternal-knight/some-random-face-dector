@@ -54,6 +54,44 @@ def detect_and_predict_mask(frame, faceNet, maskNet):
 			locs.append((startX, startY, endX, endY))
 
 	
+	if len(faces) > 0:
+		
+		faces = np.array(faces, dtype="float32")
+		preds = maskNet.predict(faces, batch_size=32)
+
+	
+maskNet = load_model("mask_detector.model")
+
+#video
+print("[INFO] starting video stream...")
+vs = VideoStream(src=0).start()
+
+
+while True:
+
+	frame = vs.read()
+	frame = imutils.resize(frame, width=400)
+
+
+	(locs, preds) = detect_and_predict_mask(frame, faceNet, maskNet)
+
+	
+	for (box, pred) in zip(locs, preds):
+		
+		(startX, startY, endX, endY) = box
+		(mask, withoutMask) = pred
+
+		
+		label = "Mask" if mask > withoutMask else "No Mask"
+		color = (0, 255, 0) if label == "Mask" else (0, 0, 255)
+
+	
+	key = cv2.waitKey(1) & 0xFF
+
+	
+	if key == ord("q"):
+		break
+
 
 cv2.destroyAllWindows()
 vs.stop()
