@@ -86,14 +86,7 @@ headModel = Dense(2, activation="softmax")(headModel)
 for layer in baseModel.layers:
 	layer.trainable = False
 
-# compile our model
-print("[INFO] compiling model...")
-opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
-model.compile(loss="binary_crossentropy", optimizer=opt,
-	metrics=["accuracy"])
-
-# train the head of the network
-print("[INFO] training head...")
+# compile our model.")
 H = model.fit(
 	aug.flow(trainX, trainY, batch_size=BS),
 	steps_per_epoch=len(trainX) // BS,
